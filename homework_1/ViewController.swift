@@ -9,17 +9,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let nameLabel: UILabel = UILabel()
-    private let nameLabelValue: UILabel = UILabel()
+    private let subscriptions: UILabel = UILabel()
+    private let subscriptionsAmount: UILabel = UILabel()
     
-    private let surnameLabel: UILabel = UILabel()
-    private let surnameLabelValue: UILabel = UILabel()
+    private let subscribes: UILabel = UILabel()
+    private let subscribesAmount: UILabel = UILabel()
     
-    private let potokNumber: UILabel = UILabel()
-    private let potokNumberValue: UILabel = UILabel()
+    private let posts: UILabel = UILabel()
+    private let postsAmount: UILabel = UILabel()
     
-    private let addDataButton: UIButton = UIButton()
-    private let clearDataButton: UIButton = UIButton()
+    private let addPostButton: UIButton = UIButton()
+    
+    private let aboutMe: UILabel = UILabel()
+    private let aboutMeText: UILabel = UILabel()
+    
+    private let exitButton: UILabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,76 +37,97 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        nameLabel.text = "Имя: "
-        nameLabelValue.text = "Дмитрий"
-        nameLabelValue.textColor = .red
+        subscriptions.text = "Подписок"
+        subscriptions.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
+        subscriptionsAmount.text = "99"
         
-        surnameLabel.text = "Фамилия: "
-        surnameLabelValue.text = "Макеев"
-        surnameLabelValue.textColor = .red
+        subscribes.text = "Подписчиков"
+        subscribes.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
+        subscribesAmount.text = "120"
         
-        potokNumber.text = "Номер потока: "
-        potokNumberValue.text = "ios 6"
-        potokNumberValue.textColor = .red
+        posts.text = "Постов"
+        posts.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
+        postsAmount.text = "300"
         
-        addDataButton.tintColor = .white
-        addDataButton.setTitle("Добавить данные", for: .normal)
-        addDataButton.backgroundColor = .black
-        addDataButton.layer.cornerRadius = 15
+        addPostButton.tintColor = .white
+        addPostButton.setTitle("Добавить пост", for: .normal)
+        addPostButton.backgroundColor = .black
+        addPostButton.layer.cornerRadius = 20
         
-        clearDataButton.tintColor = .systemBlue
-        clearDataButton.setTitle("Очистить данные", for: .disabled)
+        aboutMe.textColor = .black
+        aboutMe.text = "О себе"
+        aboutMe.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
         
-        view.addSubview(nameLabel)
-        view.addSubview(nameLabelValue)
-        view.addSubview(surnameLabel)
-        view.addSubview(surnameLabelValue)
-        view.addSubview(potokNumber)
-        view.addSubview(potokNumberValue)
-        view.addSubview(addDataButton)
-        view.addSubview(clearDataButton)
+        aboutMeText.numberOfLines = 0
+        aboutMeText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
+        
+        exitButton.text = "Выйти"
+        exitButton.textAlignment = .center
+        exitButton.textColor = .systemBlue
+        
+        view.addSubview(subscriptions)
+        view.addSubview(subscriptionsAmount)
+        view.addSubview(subscribes)
+        view.addSubview(subscribesAmount)
+        view.addSubview(posts)
+        view.addSubview(postsAmount)
+        view.addSubview(addPostButton)
+        view.addSubview(aboutMe)
+        view.addSubview(aboutMeText)
+        view.addSubview(exitButton)
         
     }
     
     private func setupConstraints() {
         
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabelValue.translatesAutoresizingMaskIntoConstraints = false
-        surnameLabel.translatesAutoresizingMaskIntoConstraints = false
-        surnameLabelValue.translatesAutoresizingMaskIntoConstraints = false
-        potokNumber.translatesAutoresizingMaskIntoConstraints = false
-        potokNumberValue.translatesAutoresizingMaskIntoConstraints = false
-        addDataButton.translatesAutoresizingMaskIntoConstraints = false
-        clearDataButton.translatesAutoresizingMaskIntoConstraints = false
+        subscriptions.translatesAutoresizingMaskIntoConstraints = false
+        subscriptionsAmount.translatesAutoresizingMaskIntoConstraints = false
+        subscribes.translatesAutoresizingMaskIntoConstraints = false
+        subscribesAmount.translatesAutoresizingMaskIntoConstraints = false
+        posts.translatesAutoresizingMaskIntoConstraints = false
+        postsAmount.translatesAutoresizingMaskIntoConstraints = false
+        addPostButton.translatesAutoresizingMaskIntoConstraints = false
+        aboutMe.translatesAutoresizingMaskIntoConstraints = false
+        aboutMeText.translatesAutoresizingMaskIntoConstraints = false
+        exitButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            subscriptions.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            subscriptions.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
             
-            nameLabelValue.topAnchor.constraint(equalTo: nameLabel.topAnchor),
-            nameLabelValue.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 5),
+            subscriptionsAmount.topAnchor.constraint(equalTo: subscriptions.bottomAnchor,constant: 10),
+            subscriptionsAmount.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 65),
             
-            surnameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
-            surnameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            subscribes.topAnchor.constraint(equalTo: subscriptions.topAnchor),
+            subscribes.leadingAnchor.constraint(equalTo: subscriptions.trailingAnchor, constant: 20),
+
+            subscribesAmount.topAnchor.constraint(equalTo: subscribes.bottomAnchor, constant: 10),
+            subscribesAmount.leadingAnchor.constraint(equalTo: subscribes.leadingAnchor, constant: 45),
+
+            posts.topAnchor.constraint(equalTo: subscribes.topAnchor),
+            posts.leadingAnchor.constraint(equalTo: subscribes.trailingAnchor, constant: 25),
+
+            postsAmount.topAnchor.constraint(equalTo: posts.bottomAnchor, constant: 10),
+            postsAmount.leadingAnchor.constraint(equalTo: posts.leadingAnchor, constant: 17),
+
+            addPostButton.topAnchor.constraint(equalTo: subscribesAmount.bottomAnchor, constant: 20),
+            addPostButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            addPostButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            addPostButton.heightAnchor.constraint(equalToConstant: 40),
+
+            aboutMe.topAnchor.constraint(equalTo: addPostButton.bottomAnchor, constant: 20),
+            aboutMe.leadingAnchor.constraint(equalTo: addPostButton.leadingAnchor),
+            aboutMe.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -70),
+            aboutMe.heightAnchor.constraint(equalToConstant: 20),
             
-            surnameLabelValue.topAnchor.constraint(equalTo: surnameLabel.topAnchor),
-            surnameLabelValue.leadingAnchor.constraint(equalTo: surnameLabel.trailingAnchor, constant: 5),
+            aboutMeText.topAnchor.constraint(equalTo: aboutMe.bottomAnchor, constant: 5),
+            aboutMeText.leadingAnchor.constraint(equalTo: aboutMe.leadingAnchor),
+            aboutMeText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            aboutMeText.heightAnchor.constraint(equalToConstant: 100),
             
-            potokNumber.topAnchor.constraint(equalTo: surnameLabel.bottomAnchor,constant: 10),
-            potokNumber.leadingAnchor.constraint(equalTo: surnameLabel.leadingAnchor),
-            
-            potokNumberValue.topAnchor.constraint(equalTo: potokNumber.topAnchor),
-            potokNumberValue.leadingAnchor.constraint(equalTo: potokNumber.trailingAnchor, constant: 5),
-            
-            addDataButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 650),
-            addDataButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            addDataButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            addDataButton.heightAnchor.constraint(equalToConstant: 70),
-            
-            clearDataButton.topAnchor.constraint(equalTo: addDataButton.bottomAnchor, constant: 20),
-            clearDataButton.leadingAnchor.constraint(equalTo: addDataButton.leadingAnchor),
-            clearDataButton.trailingAnchor.constraint(equalTo: addDataButton.trailingAnchor),
-            clearDataButton.heightAnchor.constraint(equalToConstant: 40)
+            exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            exitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
     }
 }
