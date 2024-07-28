@@ -9,24 +9,27 @@ import UIKit
 
 final class SettingsViewController: UIViewController {
     
-    private lazy var nameLabel: UILabel = configureLabel(text: "Имя", XCordinate: 42.0, YCordinate: 111.0)
-    private lazy var surnameLabel: UILabel = configureLabel(text: "Фамилия", XCordinate: nameLabel.frame.minX, YCordinate: nameTextField.frame.minY + 73)
-    private lazy var descriptionLabel: UILabel = configureLabel(text: "Описание", XCordinate: surnameLabel.frame.minX, YCordinate: surnameTextField.frame.minY + 73)
+    var delegate: MainViewControllerDelegate?
     
-    private lazy var nameTextField: UITextField = configureTextField(YCordinate: nameLabel.frame.minY + 24, height: 51)
-    private lazy var surnameTextField: UITextField = configureTextField(YCordinate: surnameLabel.frame.minY + 24, height: 51)
-    private lazy var descriptionTextField: UITextField = configureTextField(YCordinate: descriptionLabel.frame.minY + 24, height: 144)
+    private lazy var nameLabel: UILabel = configureLabel(text: "Имя", XCordinate: 42.0, YCordinate: 111.0)
+    private lazy var surnameLabel: UILabel = configureLabel(text: "Фамилия", XCordinate: nameLabel.frame.minX, YCordinate: nameTextView.frame.minY + 73)
+    private lazy var descriptionLabel: UILabel = configureLabel(text: "Описание", XCordinate: surnameLabel.frame.minX, YCordinate: surnameTextView.frame.minY + 73)
+    
+    private lazy var nameTextView: UITextView = configureTextField(YCordinate: nameLabel.frame.minY + 24, height: 51)
+    private lazy var surnameTextView: UITextView = configureTextField(YCordinate: surnameLabel.frame.minY + 24, height: 51)
+    private lazy var descriptionTextView: UITextView = configureTextField(YCordinate: descriptionLabel.frame.minY + 24, height: 144)
     
     private lazy var saveButton: UIButton = {
         $0.setTitle("Сохранить", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .blue
         $0.layer.cornerRadius = 30
-        $0.frame = CGRect(x: descriptionTextField.frame.minX, y: descriptionTextField.frame.minY + 370, width: view.frame.size.width - 60, height: 60)
+        $0.frame = CGRect(x: descriptionTextView.frame.minX, y: descriptionTextView.frame.minY + 370, width: view.frame.size.width - 60, height: 60)
         return $0
     }(UIButton(primaryAction: saveButtonAction))
     
     private lazy var saveButtonAction: UIAction = UIAction { [weak self] _ in
+        self?.delegate?.setUserData(name: self?.nameTextView.text ?? "", surname: self?.surnameTextView.text ?? "")
         self?.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -38,7 +41,7 @@ final class SettingsViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         title = "Настройки"
-        view.addSubviews(nameLabel, nameTextField, surnameLabel, surnameTextField, descriptionLabel, descriptionTextField, saveButton)
+        view.addSubviews(nameLabel, nameTextView, surnameLabel, surnameTextView, descriptionLabel, descriptionTextView, saveButton)
     }
     
     private func configureLabel(text: String, XCordinate: CGFloat, YCordinate: CGFloat) -> UILabel {
@@ -48,11 +51,11 @@ final class SettingsViewController: UIViewController {
         return label
     }
     
-    private func configureTextField(YCordinate: CGFloat, height: CGFloat) -> UITextField {
-        let textField = UITextField()
-        textField.backgroundColor = .systemGray5
-        textField.layer.cornerRadius = 15
-        textField.frame = CGRect(x: nameLabel.frame.minX - 12, y: YCordinate, width: view.frame.size.width - 60, height: height)
-        return textField
+    private func configureTextField(YCordinate: CGFloat, height: CGFloat) -> UITextView {
+        let textView = UITextView()
+        textView.backgroundColor = .systemGray5
+        textView.layer.cornerRadius = 15
+        textView.frame = CGRect(x: nameLabel.frame.minX - 12, y: YCordinate, width: view.frame.size.width - 60, height: height)
+        return textView
     }
 }

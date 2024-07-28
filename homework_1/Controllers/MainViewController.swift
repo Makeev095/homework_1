@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+protocol MainViewControllerDelegate {
+    func setUserData(name: String, surname: String)
+}
+
+class MainViewController: UIViewController, MainViewControllerDelegate {
     
     private lazy var mainScreenView: UIView = {
         $0.frame = CGRect(x: 30, y: 101, width: view.frame.size.width - 60, height: 110)
@@ -26,7 +30,6 @@ class MainViewController: UIViewController {
     }(UIImageView())
     
     private lazy var nameAndSurnameLabel: UILabel = {
-        $0.text = "Дмитрий Макеев"
         $0.frame = CGRect(x: avatarImage.frame.maxX + 12, y: mainScreenView.frame.minY + 29, width: 145, height: 19)
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         return $0
@@ -50,6 +53,7 @@ class MainViewController: UIViewController {
     
     private lazy var editingButtonAction: UIAction = UIAction { [weak self] _ in
         let settingsVC = SettingsViewController()
+        settingsVC.delegate = self
         self?.navigationController?.pushViewController(settingsVC, animated: true)
     }
     
@@ -69,5 +73,9 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         title = "Главная"
         view.addSubviews(mainScreenView, avatarImage, nameAndSurnameLabel, editingButton, fullInfoButton)
+    }
+    
+    func setUserData(name: String, surname: String) {
+        nameAndSurnameLabel.text = name + " " + surname
     }
 }
